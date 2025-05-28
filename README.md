@@ -66,4 +66,4 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou un
 
 ## 📧 Contact
 
-[@Grand Maitre Jedi Olivier](mailto:contact@katir.studio) 
+[@Olivier](mailto:oliviert@katir.studio) 
