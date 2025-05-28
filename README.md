@@ -66,4 +66,4 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou un
 
 ## 📧 Contact
 
-[@Olivier](mailto:oliviert@katir.studio) 
+[@Olivier](mailto:olivier@katiro.studio) 
