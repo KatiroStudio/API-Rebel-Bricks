@@ -43,10 +43,25 @@ if (file_exists($envFile)) {
     logError('Fichier .env non trouvé');
 }
 
+/**
+ * Contrôleur pour gérer les interactions avec Supabase
+ * 
+ * Ce contrôleur gère :
+ * - La connexion à la base de données Supabase
+ * - La récupération des statistiques
+ * - Le suivi des mises à jour
+ * - La gestion des erreurs
+ */
 class SupabaseController {
     private $supabaseUrl;
     private $supabaseKey;
 
+    /**
+     * Constructeur du contrôleur
+     * 
+     * Initialise la connexion à Supabase en utilisant les variables d'environnement
+     * @throws Exception si les variables d'environnement sont manquantes
+     */
     public function __construct() {
         try {
             logError('Initialisation du contrôleur Supabase');
@@ -68,6 +83,12 @@ class SupabaseController {
         }
     }
 
+    /**
+     * Envoie une réponse JSON au client
+     * 
+     * @param array $data Les données à envoyer
+     * @throws Exception si l'encodage JSON échoue
+     */
     private function sendJsonResponse($data) {
         try {
             // Nettoyer toute sortie précédente
@@ -95,6 +116,15 @@ class SupabaseController {
         }
     }
 
+    /**
+     * Effectue une requête à l'API Supabase
+     * 
+     * @param string $endpoint L'endpoint à appeler
+     * @param string $method La méthode HTTP (GET, POST, etc.)
+     * @param array|null $data Les données à envoyer
+     * @return object La réponse de l'API
+     * @throws Exception si la requête échoue
+     */
     private function makeRequest($endpoint, $method = 'GET', $data = null) {
         $url = rtrim($this->supabaseUrl, '/') . '/rest/v1/' . ltrim($endpoint, '/');
         
@@ -132,6 +162,12 @@ class SupabaseController {
         return json_decode($response);
     }
 
+    /**
+     * Gère les requêtes entrantes
+     * 
+     * Route les requêtes vers les bonnes méthodes en fonction de l'action demandée
+     * @throws Exception si l'action n'est pas valide
+     */
     public function handleRequest() {
         try {
             logError('Début du traitement de la requête Supabase');
@@ -162,6 +198,15 @@ class SupabaseController {
         }
     }
 
+    /**
+     * Récupère le statut actuel de la base de données
+     * 
+     * Retourne :
+     * - Le nombre total de sets
+     * - Le nombre total de thèmes
+     * - La date de dernière mise à jour
+     * @throws Exception si la récupération des données échoue
+     */
     private function getStatus() {
         try {
             logError('Début de getStatus');
@@ -212,8 +257,8 @@ class SupabaseController {
     }
 }
 
+// Initialiser et exécuter le contrôleur
 try {
-    // Initialiser et exécuter le contrôleur
     $controller = new SupabaseController();
     $controller->handleRequest();
 } catch (Exception $e) {
